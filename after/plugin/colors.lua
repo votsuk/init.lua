@@ -13,9 +13,8 @@ require('rose-pine').setup({
     end
 })
 
-function ColorMyPencils(color)
-	colors = color or "rose-pine"
-    vim.cmd.colorscheme(color)
+function ColorMyPencils()
+    vim.cmd.colorscheme("rose-pine")
 
     vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#6e738d", bold = false })
     vim.api.nvim_set_hl(0, "LineNr", { fg = "#9CCFD7", bold = true })
