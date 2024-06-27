@@ -6,6 +6,7 @@ lsp.ensure_installed({
     'tsserver',
     'rust_analyzer',
     'eslint',
+    'pyright',
 })
 
 lsp.nvim_workspace()

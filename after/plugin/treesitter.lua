@@ -17,6 +17,11 @@ require'nvim-treesitter.configs'.setup {
       "scss",
       "sql",
       "tsx",
+      "swift",
+  },
+
+  indent = {
+      enable = true
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)

@@ -5,10 +5,18 @@ require('rose-pine').setup({
     },
     before_highlight = function(group, highlight, palette)
         if highlight.fg == palette.pine then
-            highlight.fg = "#68998a"
+            highlight.fg = "#94ABC5"
         end
         if highlight.fg == palette.gold then
             highlight.fg = "#ffaf87"
+        end
+
+        if highlight.bg == palette.base then
+            highlight.bg = "#1D1F20"
+        end
+
+        if highlight.bg == palette.surface then
+            highlight.bg = "#242424"
         end
     end
 })
@@ -21,7 +29,7 @@ function ColorMyPencils()
     vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#6e738d", bold = false })
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-    vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#121112" })
+    vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#303030" })
 end
 
 ColorMyPencils()
