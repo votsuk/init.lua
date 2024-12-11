@@ -8,7 +8,14 @@ require('rose-pine').setup({
             highlight.fg = "#94ABC5"
         end
         if highlight.fg == palette.gold then
-            highlight.fg = "#ffaf87"
+            highlight.fg = "#FFAF87"
+        end
+        if highlight.bg == palette.base then
+            highlight.bg = "#1D1F20"
+        end
+
+        if highlight.bg == palette.surface then
+            highlight.bg = "#242424"
         end
 
         if highlight.bg == palette.base then
