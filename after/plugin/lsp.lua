@@ -3,9 +3,6 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
 lsp.ensure_installed({
-    'tsserver',
-    'rust_analyzer',
-    'eslint',
     'pyright',
 })
 
@@ -53,10 +50,6 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
-
-require('lspconfig').eslint.setup({
-    capabilities = capabilities
-})
 
 vim.diagnostic.config({
     virtual_text = true
