@@ -46,4 +46,17 @@ return require('packer').startup(function(use)
             {'rafamadriz/friendly-snippets'},
         }
     }
+
+    use({
+        "stevearc/conform.nvim",
+        config = function()
+            require("conform").setup({
+                formatters_by_ft = {
+                    lua = { "stylua" },
+                    python = { "black" },
+                    javascript = { "prettier" },
+                }
+            })
+        end,
+    })
 end)

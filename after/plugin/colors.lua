@@ -1,13 +1,13 @@
-usePoimandres()
--- useRosePine()
--- useGruvBuddy()
-
-function usePoimandres()
+local function usePoimandres()
     require("poimandres").setup({})
+
     vim.cmd.colorscheme("poimandres")
+    vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#6e738d", bold = false })
+    vim.api.nvim_set_hl(0, "LineNr", { fg = "#9CCFD7", bold = true })
+    vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#6e738d", bold = false })
 end
 
-function useRosePine()
+local function useRosePine()
     require('rose-pine').setup({
         disable_background = true,
         styles = {
@@ -50,7 +50,7 @@ function useRosePine()
     vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#303030" })
 end
 
-function useGruvBuddy()
+local function useGruvBuddy()
     vim.cmd.colorscheme("gruvbuddy")
 
     local colorbuddy = require("colorbuddy")
@@ -66,3 +66,7 @@ function useGruvBuddy()
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
     vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#303030" })
 end
+
+usePoimandres()
+-- useRosePine()
+-- useGruvBuddy()
