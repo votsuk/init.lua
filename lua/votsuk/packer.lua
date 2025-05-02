@@ -17,6 +17,7 @@ return require('packer').startup(function(use)
     })
     use "tjdevries/colorbuddy.nvim"
     use "olivercederborg/poimandres.nvim"
+    use "Hiroya-W/sequoia-moonlight.nvim"
 
 	use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
 	use('nvim-treesitter/playground')

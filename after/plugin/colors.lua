@@ -7,6 +7,17 @@ local function usePoimandres()
     vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#6e738d", bold = false })
 end
 
+local function useSequoia()
+    require("sequoia")
+    vim.cmd.colorscheme("sequoia")
+
+    vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#6e738d", bold = false })
+    vim.api.nvim_set_hl(0, "LineNr", { fg = "#9CCFD7", bold = true })
+    vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#6e738d", bold = false })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#303030" })
+end
+
 local function useRosePine()
     require('rose-pine').setup({
         disable_background = true,
@@ -67,6 +78,7 @@ local function useGruvBuddy()
     vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#303030" })
 end
 
-usePoimandres()
+-- usePoimandres()
+useSequoia()
 -- useRosePine()
 -- useGruvBuddy()
