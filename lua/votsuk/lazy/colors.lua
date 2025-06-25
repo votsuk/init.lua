@@ -30,19 +30,14 @@ return {
                     end
 
                     if highlight.bg == palette.base then
-                       highlight.bg = "#1D1F20"
+                        -- Default Color
+                        -- highlight.bg = "#1D1F20"
+
+                        highlight.bg = "#0F0F0F"
                     end
 
                     if highlight.bg == palette.surface then
                        highlight.bg = "#242424"
-                    end
-
-                    if highlight.bg == palette.base then
-                       highlight.bg = "#1D1F20"
-                    end
-
-                    if highlight.bg == palette.surface then
-                        highlight.bg = "#242424"
                     end
                 end
             })
