@@ -4,9 +4,9 @@ return {
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
+                ignore_install = {},
 				-- A list of parser names, or "all"
 				ensure_installed = {
-					"astro",
 					"bash",
 					"css",
 					"go",
@@ -15,12 +15,11 @@ return {
 					"jsdoc",
 					"json",
 					"lua",
+                    "php",
 					"python",
 					"scss",
-					"terraform",
 					"tsx",
 					"typescript",
-					"vimdoc",
 				},
 
 				-- Install parsers synchronously (only applied to `ensure_installed`)
