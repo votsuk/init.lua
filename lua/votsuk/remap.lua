@@ -38,3 +38,13 @@ end)
 vim.keymap.set("n", "<leader><leader>", function()
     vim.cmd("so")
 end)
+
+
+-- yoooo
+vim.keymap.set("n", "<leader>wt", function()
+    local tag = vim.fn.input("Enter HTML tag (e.g., h3, p, h1): ")
+    if tag ~= "" then
+        vim.cmd(string.format("s/\\v^(\\s*)(.*)$/\\1<%s>\\2<\\/%s>/", tag, tag))
+        vim.cmd("normal! == ")
+    end
+end)

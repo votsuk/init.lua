@@ -119,7 +119,6 @@ return {
             "pyright",
             "eslint",
             "tailwindcss",
-			"stylua",
 			"lua_ls",
 		}
 
