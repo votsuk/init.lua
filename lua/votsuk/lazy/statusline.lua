@@ -1,10 +1,13 @@
 local colors = {
 	bg = "#282c34",
 	fg = "#000000",
+    white = "#ffffff",
 	pink = "#CBA6F7",
 	dark_pink = "#45475A",
 	darker_pink = "#2C2E3A",
 	light = "#B6BEDA",
+    blue = "#02FFFF",
+    green = "#00875F",
 }
 
 return {
@@ -23,7 +26,7 @@ return {
 							c = { fg = colors.light, bg = colors.darker_pink },
 						},
 						insert = {
-							a = { fg = colors.fg, bg = colors.pink },
+							a = { fg = colors.white, bg = colors.green },
 							b = { fg = colors.light, bg = colors.dark_pink },
 						},
 						visual = {
