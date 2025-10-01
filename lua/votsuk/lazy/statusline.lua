@@ -1,13 +1,13 @@
 local colors = {
 	bg = "#282c34",
 	fg = "#000000",
-    white = "#ffffff",
+	white = "#ffffff",
 	pink = "#CBA6F7",
 	dark_pink = "#45475A",
 	darker_pink = "#2C2E3A",
 	light = "#B6BEDA",
-    blue = "#02FFFF",
-    green = "#00875F",
+	blue = "#02FFFF",
+	green = "#00875F",
 }
 
 return {
@@ -47,11 +47,11 @@ return {
 					lualine_a = { "mode" },
 					lualine_b = { "branch", "diagnostics" },
 					lualine_c = {
-                        {
-                            "filename",
-                            path = 1,
-                        }
-                    },
+						{
+							"filename",
+							path = 1,
+						},
+					},
 					lualine_x = { "filetype" },
 					lualine_y = { "progress" },
 					lualine_z = { "location" },

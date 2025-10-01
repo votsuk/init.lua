@@ -3,42 +3,43 @@ return {
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
 		"hrsh7th/nvim-cmp",
+
 		"j-hui/fidget.nvim",
-        "b0o/SchemaStore.nvim",
+		"b0o/SchemaStore.nvim",
 		{ "https://git.sr.ht/~whynothugo/lsp_lines.nvim" },
+
 		{
 			"folke/lazydev.nvim",
 			ft = "lua",
 			opts = {
 				library = {
-					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+					{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				},
 			},
 		},
+		{ "Bilal2453/luvit-meta", lazy = true },
 	},
 
 	config = function()
 		local cmp = require("cmp")
 
+		-- Setup fidget to show LSP progress in the statusline
 		require("fidget").setup({})
 
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 		cmp.setup({
 			mapping = cmp.mapping.preset.insert({
-				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-				["<C-Space>"] = cmp.mapping.complete(),
+				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select), -- Previous completion item
+				["<C-n>"] = cmp.mapping.select_next_item(cmp_select), -- Next completion item
+				["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Confirm selection
+				["<C-Space>"] = cmp.mapping.complete(), -- Trigger completion
 			}),
 			sources = cmp.config.sources({
-				{ name = "copilot", group_index = 2 },
 				{ name = "nvim_lsp" },
 			}, {
 				{ name = "buffer" },
@@ -75,32 +76,36 @@ return {
 
 		local lspconfig = require("lspconfig")
 
+		-- Define which LSP servers to use and their configurations
 		local servers = {
 			bashls = true,
 			lua_ls = true,
 			pyright = true,
 			astro = true,
-			ts_ls = {
-				root_dir = require("lspconfig").util.root_pattern("package.json"),
-				single_file = false,
-				server_capabilities = {
-					documentFormattingProvider = false,
+			ts_ls = true,
+			cssls = true,
+
+			-- ESLint LSP
+			eslint = {
+				settings = {
+					workingDirect = { mode = "auto" },
 				},
+				on_attach = function(client, bufnr)
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						buffer = bufnr,
+						command = "EslintFixAll",
+					})
+				end,
 			},
+
+			-- JSON language server with schema support
 			jsonls = {
-				server_capabilities = {
-					documentFormattingProvider = false,
-				},
 				settings = {
 					json = {
+						-- Use schemas from SchemaStore for better JSON completion
 						schemas = require("schemastore").json.schemas(),
 						validate = { enable = true },
 					},
-				},
-			},
-			cssls = {
-				server_capabilities = {
-					documentFormattingProvider = false,
 				},
 			},
 		}
@@ -115,59 +120,29 @@ return {
 		end, vim.tbl_keys(servers))
 
 		require("mason").setup()
+
+		-- Define tools that should always be installed
 		local ensure_installed = {
-            "pyright",
-            "eslint",
-            "tailwindcss",
-			"lua_ls",
+			"pyright", -- Python language server
+			"typescript-language-server", -- TypeScript language server
+			"eslint", -- Linter and formatter
+			"lua_ls", -- Lua language server
 		}
 
 		vim.list_extend(ensure_installed, servers_to_install)
+
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
 		for name, config in pairs(servers) do
 			if config == true then
 				config = {}
 			end
+
 			config = vim.tbl_deep_extend("force", {}, {
 				capabilities = capabilities,
 			}, config)
 
 			lspconfig[name].setup(config)
 		end
-
-		vim.api.nvim_create_autocmd("LspAttach", {
-			callback = function(args)
-				local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
-
-				local settings = servers[client.name]
-				if type(settings) ~= "table" then
-					settings = {}
-				end
-
-				local builtin = require("telescope.builtin")
-
-				vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-				vim.keymap.set("n", "gd", builtin.lsp_definitions, { buffer = 0 })
-				vim.keymap.set("n", "gr", builtin.lsp_references, { buffer = 0 })
-				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
-				vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
-
-				vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = 0 })
-
-				-- Override server capabilities
-				if settings.server_capabilities then
-					for k, v in pairs(settings.server_capabilities) do
-						if v == vim.NIL then
-							---@diagnostic disable-next-line: cast-local-type
-							v = nil
-						end
-
-						client.server_capabilities[k] = v
-					end
-				end
-			end,
-		})
 	end,
 }

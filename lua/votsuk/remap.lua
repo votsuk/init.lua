@@ -21,30 +21,26 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
+vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
 
 vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<leader>f", function()
-    require("conform").format({ bufnr = 0 })
-end)
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>ca", function()
-    require("cellular-automaton").start_animation("make_it_rain")
+	require("cellular-automaton").start_animation("make_it_rain")
 end)
 
 vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
+	vim.cmd("so")
 end)
-
 
 -- yoooo
 vim.keymap.set("n", "<leader>wt", function()
-    local tag = vim.fn.input("Enter HTML tag (e.g., h3, p, h1): ")
-    if tag ~= "" then
-        vim.cmd(string.format("s/\\v^(\\s*)(.*)$/\\1<%s>\\2<\\/%s>/", tag, tag))
-        vim.cmd("normal! == ")
-    end
+	local tag = vim.fn.input("Enter HTML tag (e.g., h3, p, h1): ")
+	if tag ~= "" then
+		vim.cmd(string.format("s/\\v^(\\s*)(.*)$/\\1<%s>\\2<\\/%s>/", tag, tag))
+		vim.cmd("normal! == ")
+	end
 end)
