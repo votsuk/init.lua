@@ -74,7 +74,7 @@ return {
 			capabilities = require("cmp_nvim_lsp").default_capabilities()
 		end
 
-		local lspconfig = require("lspconfig")
+
 
 		-- Define which LSP servers to use and their configurations
 		local servers = {
@@ -86,17 +86,17 @@ return {
 			cssls = true,
 
 			-- ESLint LSP
-			eslint = {
-				settings = {
-					workingDirect = { mode = "auto" },
-				},
-				on_attach = function(client, bufnr)
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						buffer = bufnr,
-						command = "EslintFixAll",
-					})
-				end,
-			},
+			-- eslint = {
+			-- 	settings = {
+			-- 		workingDirect = { mode = "auto" },
+			-- 	},
+			-- 	on_attach = function(client, bufnr)
+			-- 		vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 			buffer = bufnr,
+			-- 			command = "EslintFixAll",
+			-- 		})
+			-- 	end,
+			-- },
 
 			-- JSON language server with schema support
 			jsonls = {
@@ -125,7 +125,7 @@ return {
 		local ensure_installed = {
 			"pyright", -- Python language server
 			"typescript-language-server", -- TypeScript language server
-			"eslint", -- Linter and formatter
+			-- "eslint", -- Linter and formatter
 			"lua_ls", -- Lua language server
 		}
 
@@ -142,7 +142,8 @@ return {
 				capabilities = capabilities,
 			}, config)
 
-			lspconfig[name].setup(config)
+			vim.lsp.config(name, config)
+			vim.lsp.enable(name)
 		end
 	end,
 }

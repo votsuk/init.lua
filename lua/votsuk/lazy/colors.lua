@@ -290,6 +290,31 @@ local function setup_custom_theme()
 end
 
 -- Apply the custom theme
-setup_custom_theme()
+-- setup_custom_theme()
+-- return {}
 
-return {}
+return {
+    {
+        "folke/tokyonight.nvim",
+        lazy=false,
+        priority=1000,
+        opts={
+            style="night",
+        },
+        config=function(_, opts)
+            require("tokyonight").setup(opts)
+            vim.cmd([[colorscheme tokyonight]])
+        end
+    }
+}
+
+-- return {
+--     {
+--         "catppuccin/nvim",
+--         lazy = false,
+--         priority = 1000,
+--         config=function()
+--             vim.cmd.colorscheme("catppuccin-mocha")
+--         end
+--     }
+-- }
