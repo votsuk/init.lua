@@ -293,17 +293,28 @@ end
 -- setup_custom_theme()
 -- return {}
 
+--return {
+--    {
+--        "folke/tokyonight.nvim",
+--        lazy=false,
+--        priority=1000,
+--        opts={
+--            style="night",
+--        },
+--        config=function(_, opts)
+--            require("tokyonight").setup(opts)
+--            vim.cmd([[colorscheme tokyonight]])
+--        end
+--    }
+--}
+
 return {
     {
-        "folke/tokyonight.nvim",
+        "rebelot/kanagawa.nvim",
         lazy=false,
         priority=1000,
-        opts={
-            style="night",
-        },
-        config=function(_, opts)
-            require("tokyonight").setup(opts)
-            vim.cmd([[colorscheme tokyonight]])
+        config=function()
+            vim.cmd([[colorscheme kanagawa]])
         end
     }
 }
