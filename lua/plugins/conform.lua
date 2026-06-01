@@ -12,6 +12,11 @@ return {
 			yaml = { "prettierd" },
 			markdown = { "prettierd" },
 			html = { "prettierd" },
+			astro = { "prettierd" },
+			python = { "black" },
+			css = { "prettierd" },
+			scss = { "prettierd" },
+			less = { "prettierd" },
 		},
 		format_on_save = {
 			timeout_ms = 500,
